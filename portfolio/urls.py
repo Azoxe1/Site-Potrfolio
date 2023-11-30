@@ -18,10 +18,13 @@ from xml.etree.ElementInclude import include
 
 from django.contrib import admin
 from django.urls import path
-
-from main.views import basic_page
+from django.conf import settings
+from django.conf.urls.static import static
+from main.views import projects, base, contact
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', basic_page, name='basic_page'),
-]
+    path('projects/', projects, name='projects'),
+    path('', base, name='base'),
+    path('contact_form/', contact, name='contact_form')
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
