@@ -1,0 +1,36 @@
+{% block content %}
+
+{% if form.errors %}
+  <p>Недопустимые данные</p>
+{% endif %}
+<body style='background-image: url(https://celes.club/uploads/posts/2023-03/1679442888_celes-club-p-fon-dlya-saita-gradient-krasivo-36.jpg);background-size: cover;'>
+</body>
+<head>
+    <meta charset="UTF-8">
+    <title>Регистрация</title>
+</head>
+<form method="post">
+    {% csrf_token %}
+<div style='font-family: Arial;position: absolute; left: 750px; top: 300px;display:flex; flex-direction:column; justify-content:center; align-items:center; width:fit-content;background-color: #F5ECDA;border:4px #F2DFDF groove;border-radius: 20px;
+width:300px;
+     height: 350px;' class="container-fluid white border border-dark py-3">
+        <div style="width: fit-content; margin: auto;padding-bottom: 15px;font-size:25px">
+            {{ form.username}}<br>
+            {{ form.email }}<br>
+            <input type="password" minlength="8" {{ form.password1 }}<br>
+            {{ form.password2 }}<br>
+        </div>
+    <form method="post">
+            <input type="submit" class="btn btn-outline-primary text-dark btn-block text-black" style="width:190px;height:35px;border-radius: 10px" value="Регистрация" />
+        </form><br>
+
+
+<form action="{%  url 'login' %}">
+                  <input type="submit" class="btn btn-outline-primary text-dark btn-block text-black" style="width:190px;height:35px;border-radius: 10px" value="Уже есть аккаунт" />
+</form>
+    <form action="{%  url 'base' %}">
+
+    <input type="submit" class="btn btn-outline-primary text-dark btn-block text-black" style="width:190px;height:35px;border-radius: 10px" value="Вернуться" />
+</form>
+</div>
+{% endblock %}

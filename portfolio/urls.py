@@ -20,11 +20,15 @@ from django.contrib import admin
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
-from main.views import projects, base, contact
+from main.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('projects/', projects, name='projects'),
     path('', base, name='base'),
-    path('contact_form/', contact, name='contact_form')
+    path('contact_form/', contact, name='contact_form'),
+    path('registration/', RegisterUser.as_view(), name='registration'),
+    path('login/', LoginUser.as_view(), name='login'),
+    path('logout/', logout_user, name='logout'),
+    path('lk/', lk, name='lk')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

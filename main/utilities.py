@@ -30,3 +30,4 @@ def feedback_email_send(request, form):            #да, этот код над
                   recipient_list=[DEFAULT_FROM_EMAIL])
     except BadHeaderError:
         logger.exception("Найден неккоректный заголовок")
+
