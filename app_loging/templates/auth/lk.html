@@ -1,0 +1,13 @@
+{% block content %}
+
+{% if form.errors %}
+  <p>Недопустимые данные</p>
+{% endif %}
+<body style='background-image: url(https://celes.club/uploads/posts/2023-03/1679442888_celes-club-p-fon-dlya-saita-gradient-krasivo-36.jpg);background-size: cover;'>
+</body>
+<p>Личный кабинет? =)</p>
+   <form action="{%  url 'base' %}">
+
+    <input type="submit" class="btn btn-outline-primary text-dark btn-block text-black" style="width:190px;height:35px;border-radius: 10px" value="Вернуться" />
+</form>
+{% endblock %}

@@ -1,0 +1,45 @@
+
+{% block content %}
+<body style='background-image: url(https://celes.club/uploads/posts/2023-03/1679442888_celes-club-p-fon-dlya-saita-gradient-krasivo-36.jpg);background-size: cover;'>
+</body>
+{% if form.errors %}
+  <p>Неверно введен логин или пароль.</p>
+{% endif %}
+
+{% if next %}
+  {% if user.is_authenticated %}
+    <p>Your account doesn't have access to this page. To proceed,
+    please login with an account that has access.</p>
+  {% else %}
+    <p>Please login to see this page.</p>
+  {% endif %}
+{% endif %}
+
+<form method="post" action="{% url 'login' %}">
+{% csrf_token %}
+<div style='font-family: Arial;position: absolute; left: 750px; top: 300px;display:flex; flex-direction:column; justify-content:center; align-items:center; width:fit-content;background-color: #F5ECDA;border:4px #F2DFDF groove;border-radius: 20px;
+width:300px;
+     height: 250px;' class="container-fluid white border border-dark py-3">
+        <div style="width: fit-content; margin: auto;padding-bottom: 15px;font-size:25px">
+            {{ form.username}}<br>
+            {{ form.password }}<br>
+
+
+        </div>
+  <input type="submit" class="btn btn-outline-primary text-dark btn-block text-black" style="width:190px;height:35px;border-radius: 10px" value="Авторизация" /><br>
+</form>
+<form action="{%  url 'reset_password' %}">
+
+    <input type="submit" class="btn btn-outline-primary text-dark btn-block text-black" style="width:190px;height:35px;border-radius: 10px" value="Забыли пароль?" />
+</form>
+<form action="{%  url 'base' %}">
+
+    <input type="submit" class="btn btn-outline-primary text-dark btn-block text-black" style="width:190px;height:35px;border-radius: 10px" value="Вернуться" />
+</form>
+<input type="hidden" name="next" value="{{ next }}" />
+
+
+{# Assumes you setup the password_reset view in your URLconf #}
+
+
+{% endblock %}

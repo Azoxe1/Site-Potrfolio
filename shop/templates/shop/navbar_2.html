@@ -1,0 +1,54 @@
+<!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container px-4 px-lg-5">
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'base' %}">В главное меню</a></li>
+
+
+            {% if user.is_authenticated %}
+               <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Выйти из аккаунта: {{user.username}}</a></li>
+
+            {% else %}
+               <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Авторизация</a></li>
+
+               <li class="nav-item"><a class="nav-link" href="{% url 'registration' %}">Регистрация</a></li>
+
+            {% endif %}
+
+
+
+
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Навигация</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+
+                                <li><a class="dropdown-item" href="{% url 'category' %}">Онлайн-магазин</a></li>
+                                <li><a class="dropdown-item" href="{% url 'contact_form' %}">Форма обратной связи</a></li>
+                                <li><hr class="dropdown-divider" /></li>
+                                <li><a class="dropdown-item" href="{% url 'projects' %}">Мои проекты</a></li>
+                                <li><hr class="dropdown-divider" /></li>
+                                <li><a class="dropdown-item" href="https://github.com/Azoxe1">Мой GIT</a></li>
+                                <li><a class="dropdown-item" href="https://hh.ru/resume/ba6bf01bff05f9a70a0039ed1f4551665a3672">Мой НН</a></li>
+                                <li><hr class="dropdown-divider" /></li>
+                                <li><a class="dropdown-item" href="https://t.me/Azoxe1">Связаться со мной</a></li>
+                                <li><a class="dropdown-item" href="{% url 'category' %}">Обо мне</a></li>
+
+                            </ul>
+                        </li>
+                    </ul>
+                    <form class="d-flex">
+
+
+
+
+
+
+                    </form>
+                </div>
+            </div>
+        </nav>

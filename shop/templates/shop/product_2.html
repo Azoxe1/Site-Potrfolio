@@ -1,0 +1,127 @@
+{% extends 'shop/base.html' %}
+{% block content %}
+
+
+
+<div class="container">
+<br/>
+
+{% for p in product %}
+<div class="card mb-3">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img src="{{ p.image.url }}" class="img-fluid rounded-start" alt="...">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+
+        <center>
+        <h5 class="card-title">{{ p.name }}</h5>
+        <br/>
+        <p class="card-text justified">{{ p.description }}</p>
+
+
+        <div class="d-flex justify-content-center small text-warning mb-2">
+                <div class="bi-star-fill"></div>
+                Скидка {{p.get_percentage|floatformat:0}}%
+                <div class="bi-star-fill"></div>
+                </div>
+
+                <strike>
+                {{ p.old_price }}₽
+                </strike>
+                &nbsp;
+
+
+
+
+
+            {{ p.price }}₽
+
+<p class="card-text justified"><a>Количество отзывов: {{reviews.count}}</a></p>
+                <p class="card-text justified"><a>Рейтинг: {{average_rating.rating|floatformat:1}} из 5</a></p>
+            <br/><br/>
+<div class="row justify-content-center">
+    <div class="col-md-2">Количество:</div>
+                <div class="col-md-2">
+                <select class="form-select form-select-sm" id="qty-cart">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                </select>
+                </div>
+            </div>
+            <br/><br/>
+        <a href="{% url 'category'%}" class="btn btn-secondary">В меню</a>
+        <button type="button" value="{{ p.id }}" class="btn btn-secondary" id="add-cart">Добавить в корзину</button>
+            <br><br><br>
+            {% for r in reviews %}
+                <div style = "border:3px groove;width: 300px;border-width:2px;border-radius: 5px;background-color: white;display: inline-block">
+                        <p><a>{{r.user.username|title}}</a></p>
+                        <p class = 'short'><a>{{r.review}}</a></p>
+                        <p class = 'short'><a>{{r.get_rating_display}}</a></p>
+                        <p class = 'short' ><a><font size="1">{{r.date}}</font></a></p>
+
+                        </div>
+            {% endfor %}
+                {% if request.user.is_authenticated %}
+                <form action="{% url 'add_review' p.title %}" method="POST">
+                    {{ review.review }}<br>
+                    {{ review.rating }}
+                    {% csrf_token %}
+                    <a href="{% url 'add_review' p.title %}" >
+                        <input type="submit" class="btn btn-secondary"  style="width:190px;height:35px;border-radius: 10px" value="Отправить" />
+                        </a>
+                    </form>
+            </div>{% else %}
+    <p class="row justify-content-center"><a>Авторизуйтесь - для отправки комментария</a></p>
+    {% endif %}
+    {% endfor %}
+    </center>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<script>
+// Check if button pressed
+$(document).on('click', '#add-cart', function(e){
+    e.preventDefault();
+    $.ajax({
+        type: 'POST',
+        url: '{% url 'cart_add' %}',
+        data: {
+    product_id: $('#add-cart').val(),
+    product_qty: $('#qty-cart option:selected').text(),
+    csrfmiddlewaretoken: '{{ csrf_token }}',
+    action: 'post'
+        },
+
+        success: function(json){
+            //console.log(json)
+            document.getElementById("cart_quantity").textContent = json.qty
+        },
+
+        error: function(xhr, errmsg, err){
+
+        }
+
+
+    });
+
+
+
+})
+</script>
+
+<style>
+    .short
+    {
+    line-height: 7px;
+
+}
+</style>
+{% endblock %}

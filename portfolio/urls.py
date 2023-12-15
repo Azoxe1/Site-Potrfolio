@@ -14,21 +14,66 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from xml.etree.ElementInclude import include
 
 from django.contrib import admin
-from django.urls import path
-from django.conf import settings
+from django.urls import path, include, re_path
 from django.conf.urls.static import static
-from main.views import *
+from django.contrib.auth import views as auth_views
+
+from shop.api import *
+from shop.views import *
+from feedback.views import contact
+from app_loging.views import *
+
+from portfolio.views import *
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('projects/', projects, name='projects'),
+    #reset_password_test
+    path('reset/<uidb64>/<token>', auth_views.PasswordResetConfirmView.as_view(),
+          name ='password_reset_confirm'),
+    path('reset_password/', auth_views.PasswordResetView.as_view(),
+         name ='reset_password'),
+    path('reset_password_sent/', auth_views.PasswordResetDoneView.as_view(),
+         name ='password_reset_done'),
+    path('reset_password_complete/', auth_views.PasswordResetCompleteView.as_view(),
+         name ='password_reset_complete'),
+    #base
     path('', base, name='base'),
-    path('contact_form/', contact, name='contact_form'),
+    path('admin/', admin.site.urls),
+    #auth
     path('registration/', RegisterUser.as_view(), name='registration'),
     path('login/', LoginUser.as_view(), name='login'),
     path('logout/', logout_user, name='logout'),
-    path('lk/', lk, name='lk')
+    #projects
+    path('projects/', projects, name='projects'),
+    path('contact_form/', contact, name='contact_form'),
+    path('lk/', lk, name='lk'),
+    #shop
+    path('shop/', index, name='shop'),
+    path('category/', category_list, name='category'),
+    path('category/<title>/', product_list_view, name='product_list_view'),
+    path('product/<title>/', product_view, name='product_view'),
+    path('review/<title>/', add_review, name='add_review'),
+    path('add_cat/', add_category, name='add_category'),
+    path('cart/', include('cart.urls')),
+    ####API methods#########
+    path('api/v1/projects/', ProjectsView.as_view(), name='api_projects'),
+    path('api/v1/products/', ProductsView.as_view(), name='api_projects'),
+    path('api/v1/categories/', CategoriesView.as_view(), name='api_projects'),
+    ####API AUTH methods#########
+      path('api/v1/drf-auth/', include('rest_framework.urls')),
+      path('api/v1/auth/', include('djoser.urls')),
+    path('api/v1/registration/', RegisterAccount.as_view(), name='api_reg'),
+    path('api/v1/confirm/', ConfirmAccount.as_view(), name='api_conf'),
+    path('api/v1/details/', AccountDetails.as_view(), name='api_details'),
+    path('api/v1/login/', LoginAccount.as_view(), name='api_login'),
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+# if settings.OPEN_API:
+#     open_api = [
+#         path('openapi/', SpectacularSwaggerView.as_view(url_name='schema'),
+#              name='swagger-ui'),
+#     ]
+#     open_api.extend(urlpatterns)
+#     urlpatterns = open_api

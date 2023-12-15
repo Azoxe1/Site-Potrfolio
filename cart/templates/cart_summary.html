@@ -1,0 +1,78 @@
+{% extends 'shop/base.html' %}
+
+
+{% block content %}
+
+        <!-- Header-->
+        <header class="bg-dark py-5">
+            <div class="container px-4 px-lg-5 my-5">
+                <div class="text-center text-white">
+                    <h1 class="display-4 fw-bolder">Ваша корзина</h1>
+                    <p class="lead fw-normal text-white-50 mb-0">Просмотр корзины...</p>
+                </div>
+            </div>
+        </header>
+        <br/>
+        <div class="container">
+        {% if cart_products %}
+        	{% for product in cart_products %}
+
+<div class="card mb-3">
+  <div class="row g-0">
+    <div class="col-md-4">
+        <a href="{% url 'product_view' product.title %}">
+            <img src="{{ product.image.url }}" class="img-fluid rounded-start" alt="...">
+        </a>
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <center>
+        <h5 class="card-title">{{ product.name }}</h5>
+        <br/>
+        <p class="card-text justified">{{ product.description }}</p>
+            <div class="d-flex justify-content-center small text-warning mb-2">
+                <div class="bi-star-fill"></div>
+                    Скидка {{product.get_percentage|floatformat:0}}%
+                <div class="bi-star-fill"></div>
+            </div>
+            {{ product.price }} ₽<br>
+            <strike>
+                {{ product.old_price }}₽
+                </strike>
+            <br>
+            <div class="row justify-content-center">
+    <div class="col-md-2">Количество:</div>
+                <div class="col-md-2">
+                <select class="form-select form-select-sm" id="select{{product.id}}">
+
+            {% for key, value in quantities.items %}
+                {% if key == product.id|slugify %}
+            <option selected>{{ value }}</option>
+                {% endif %}
+            {% endfor %}
+
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                </select>
+                </div>
+            </div>
+            <br/><br/>
+        <a href="{% url 'base'%}" class="btn btn-secondary">В меню</a>
+
+    </center>
+      </div>
+    </div>
+  </div>
+</div><br/>
+
+        	{% endfor %}
+        	{% else %}
+        	There's Nothing In Your Cart...
+        	<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+        {% endif %}
+    	</div>
+
+{% endblock %}

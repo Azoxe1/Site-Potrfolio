@@ -1,0 +1,61 @@
+{% extends 'shop/base.html' %}
+
+
+{% block content %}
+
+{% load static %}
+<link rel="shortcut icon" type="image/png" href="{% static 'icon/shortcut.png' %}"/>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Категории продуктов</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+            crossorigin="anonymous"></script>
+</head>
+<form action="{% url 'cart_summary' %}" class = 'd-flex'>
+<!--        <button class = 'btn btn-' type="submit">-->
+<!--            Корзина-->
+<!--            <span class = 'badge bg=dark text-white ms-2 rounded-pill'>0</span>-->
+<!--        </button>-->
+</form>
+<body>
+    <ul>
+
+        {% for p in category %}
+        <div style = "border:3px groove;width: 200px;background-color: white;margin:1em auto;border-width:5px;border-radius: 5px;display: inline-block">
+
+            <a href="{% url 'product_list_view' p.title %}">
+                <div style = "text-align: center;">
+                <img width="100" height="100" src = "{{ p.image.url }}" />
+            </a>
+            <br>
+            <h7 class="card-text justified"><a>{{p.title}}</a></h7>
+            <br>
+                <h8><a>{{p.category.count}} товар{{p.category.count|pluralize:"а"}}</a></h8>
+            </div>
+        </div>
+        {% endfor %}
+
+<!--        <form action="{%  url 'shop' %}">-->
+<!--                    <input type="submit" class="btn btn-outline-primary text-dark btn-block text-black" style="width:190px;height:35px;border-radius: 10px" value="Все товары" />-->
+<!--                </form>-->
+<!--        <form action="{%  url 'base' %}">-->
+<!--                    <input type="submit" class="btn btn-outline-primary text-dark btn-block text-black" style="width:190px;height:35px;border-radius: 10px" value="В главное меню" />-->
+<!--                </form>-->
+    </ul>
+
+<!--    <div style = "border:3px groove;height:210px; width: 200px;background-color: white;margin:1em auto;border-width:5px;border-radius: 20px;display: inline-block">-->
+<!--        <h3>Добавить новую категорию</h3>-->
+<!--                <h6>Либо через админку\API</h6>-->
+<!--            <form action="{% url 'add_category' %}" method="POST">-->
+<!--                {{ cat_form.title }}-->
+<!--                {{ cat_form.image }}-->
+<!--                {% csrf_token %}-->
+<!--            <input type="submit" class="btn btn-outline-primary text-dark btn-block text-black"  style="width:190px;height:35px;border-radius: 10px" value="отправить" />-->
+        </form>
+    </div>
+</body>
+
+
+{% endblock %}

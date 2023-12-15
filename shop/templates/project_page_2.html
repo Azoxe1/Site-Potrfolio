@@ -1,0 +1,46 @@
+{% extends 'shop/base_2.html' %}
+{% block content %}
+
+<body>
+ <!-- Header-->
+        <header class="bg-dark py-5">
+            <div class="container px-4 px-lg-5 my-5">
+                <div class="text-center text-white">
+                    <h1 class="display-4 fw-bolder">Мои проекты</h1>
+                    <p class="lead fw-normal text-white-50 mb-0">С практики и учебные</p>
+                </div>
+            </div>
+        </header>
+        <br/>
+        <div class="container">
+        	{% for p in project %}
+
+<div class="card mb-3">
+  <div class="row g-0">
+    <div class="col-md-4">
+            <img src="{{ p.image.url }}" class="img-fluid rounded-start" alt="...">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <center>
+        <h5 class="card-title">{{ p.title }}</h5>
+        <br/>
+        <p class="card-text justified">{{ p.description }}</p>
+            Стак: {{ p.stack }} ₽<br>
+            <br>
+            <br>
+            <br>
+                          <a href={{p.git}} class="btn btn-secondary">Ссылка на GitHub</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endfor %}
+</div>
+
+</body>
+
+
+{% endblock %}

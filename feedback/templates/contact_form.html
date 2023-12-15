@@ -1,0 +1,38 @@
+{% extends 'shop/base_2.html' %}
+
+{% block content %}
+
+{% load static %}
+<link rel="shortcut icon" type="image/png" href="{% static 'icon/shortcut.png' %}"/>
+
+<body>
+    <div style='font-family: Arial;position: absolute; left: 200px; top: 100px;display:flex; flex-direction:column; justify-content:center; align-items:center; width:fit-content;background-color: white;border:4px #E9E0D3 groove;border-radius: 4px' class="container-fluid white border border-dark py-3">
+        <form autocomplete="off" method="POST">
+            <div class="col border-left ">
+
+                    <h2>Напишите нам</h2>
+                    <h6>Оставьте Ваши данные и мы свяжемся с Вами</h6>
+
+            </div>
+            <div style="width: fit-content; margin: auto;padding-bottom: 15px;font-size:16px">
+                {% csrf_token %}
+                {{ form.name}}<br>
+                <input type="tel" pattern="(8|\+7)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}" minlength="11" maxlength="18" {{ form.phone_number }} <br>
+                {{ form.telegram}}<br>
+            </div>
+            <div class="col border-left ">
+                    <h6>Выберите дату</h6>
+            </div>
+            <div style="width: fit-content; margin: auto;padding-bottom: 15px;font-size:15px">
+
+                {{ form.selected_date }}<br>
+             </div>
+            <div style="width: fit-content; margin: auto;padding-bottom: 10px;font-size:13px">
+                <form action="{%  url 'base' %}">
+                    <input type="submit" class="btn btn-outline-primary text-dark btn-block text-black" style="width:190px;height:35px;border-radius: 10px" value="Записаться на консультацию" />
+                </form>
+            </div>
+        </div>
+</body>
+
+{% endblock %}
