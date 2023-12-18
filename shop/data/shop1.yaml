@@ -1,0 +1,37 @@
+vendor: Связной
+categories:
+  - id: 224
+    name: Смартфоны
+  - id: 15
+    name: Аксессуары
+  - id: 1
+    name: Flash-накопители
+
+goods:
+  - id: 4216292
+    category: 224
+    title: Смартфон Apple iPhone XS Max 512GB (золотистый)
+    price: 110000
+    old_price: 116990
+    quantity: 14
+
+  - id: 4216313
+    category: 224
+    name: Смартфон Apple iPhone XR 256GB (красный)
+    price: 65000
+    price_rrc: 69990
+    quantity: 9
+
+  - id: 4216226
+    category: 224
+    title: Смартфон Apple iPhone XR 256GB (черный)
+    price: 65000
+    old_price: 69990
+    quantity: 5
+
+  - id: 4672670
+    category: 224
+    name: Смартфон Apple iPhone XR 128GB (синий)
+    price: 60000
+    old_price: 64990
+    quantity: 7

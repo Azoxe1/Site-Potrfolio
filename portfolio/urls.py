@@ -54,7 +54,7 @@ urlpatterns = [
     path('category/<title>/', product_list_view, name='product_list_view'),
     path('product/<title>/', product_view, name='product_view'),
     path('review/<title>/', add_review, name='add_review'),
-    path('add_cat/', add_category, name='add_category'),
+    # path('add_cat/', add_category, name='add_category'),
     path('cart/', include('cart.urls')),
     ####API methods#########
     path('api/v1/projects/', ProjectsView.as_view(), name='api_projects'),
@@ -65,15 +65,10 @@ urlpatterns = [
       path('api/v1/auth/', include('djoser.urls')),
     path('api/v1/registration/', RegisterAccount.as_view(), name='api_reg'),
     path('api/v1/confirm/', ConfirmAccount.as_view(), name='api_conf'),
+    path('api/v1/contact/', ContactView.as_view(), name='api_contact'),
     path('api/v1/details/', AccountDetails.as_view(), name='api_details'),
     path('api/v1/login/', LoginAccount.as_view(), name='api_login'),
+    path('api/v1/order/', OrderView.as_view(), name='api_order'),
+    path('api/v1/cart/', CartView.as_view(), name='api_cart'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
-# if settings.OPEN_API:
-#     open_api = [
-#         path('openapi/', SpectacularSwaggerView.as_view(url_name='schema'),
-#              name='swagger-ui'),
-#     ]
-#     open_api.extend(urlpatterns)
-#     urlpatterns = open_api

@@ -48,6 +48,7 @@ class Vendor(models.Model):
     title = models.CharField(max_length=500, default='The Best Vendor')
     image = models.ImageField(upload_to=user_directory_path, default='vendor.jpg')
     description = models.TextField(null=True)
+    available = models.BooleanField(default=False)
 
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 
@@ -70,9 +71,10 @@ class Product(models.Model):
     old_price = models.IntegerField(default='299')
     product_status = models.CharField(choices=STATUS, max_length=100, default='черновик')
     feachured = models.BooleanField(default=False, verbose_name='Опубликовано')
+    quantity = models.IntegerField()
 
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-    vendor = models.ForeignKey(Vendor, on_delete=models.CASCADE, null=True)
+    vendor = models.ForeignKey(Vendor, on_delete=models.CASCADE, null=True, related_name='vendor')
     category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, related_name='category')
 
     class Meta:
@@ -142,7 +144,7 @@ class Contact(models.Model):
 class Order(models.Model):
     objects = models.manager.Manager()
     user = models.ForeignKey(User, verbose_name='Пользователь',
-                             related_name='orders', blank=True,
+                             related_name='user', blank=True,
                              on_delete=models.CASCADE)
     dt = models.DateTimeField(auto_now_add=True)
     state = models.CharField(verbose_name='Статус', choices=STATUS_CHOISE, max_length=15)
@@ -156,7 +158,7 @@ class Order(models.Model):
         ordering = ('-dt',)
 
     def __str__(self):
-        return str(self.id)
+        return str(self.dt)
 
 
 class OrderItem(models.Model):
@@ -164,7 +166,7 @@ class OrderItem(models.Model):
     order = models.ForeignKey(Order, verbose_name='Заказ', related_name='ordered_items', blank=True,
                               on_delete=models.CASCADE)
 
-    product_name = models.ForeignKey(Product, verbose_name='Информация о продукте', related_name='product_name',
+    product_name = models.ForeignKey(Product, verbose_name='Информация о продукте', related_name='ordered_items',
                                      blank=True,
                                      on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(verbose_name='Количество')

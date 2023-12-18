@@ -18,7 +18,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 
 class VendorAdmin(admin.ModelAdmin):
-    list_display = ['title', 'vendor_image']
+    list_display = ['title', 'vendor_image', 'available']
 
 
 class ProductReviewAdmin(admin.ModelAdmin):

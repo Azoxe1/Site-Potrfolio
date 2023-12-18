@@ -51,7 +51,7 @@ class User(AbstractUser):
                                     'unique': _("A user with that username already exists."),
                                 },
                                 )
-    title = models.CharField(max_length=500)
+    title = models.CharField(max_length=500, default='Пусто')
     type = models.CharField(verbose_name='Тип пользователя', choices=USER_TYPE_CHOICES, max_length=5, default='buyer')
 
     USER_MODEL = 'email'

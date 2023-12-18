@@ -23,19 +23,17 @@ def projects(request):
     return render(request, 'project_page_2.html', context)
 
 
-class ProjectsView(ListAPIView):
-    queryset = Projects.objects.all()
-    serializer_class = ProjectsSerializer
-
 
 def base(request):
     return render(request, 'base_page.html', )
 
 
 def index(request):
-    products = Product.objects.filter(feachured=True, product_status="опубликовано").order_by('-id')
+    vendor = Vendor.objects.filter(available=True)
+    products = Product.objects.filter(feachured=True, vendor__in=vendor, product_status="опубликовано").order_by('-id')
     context = {
-        "products": products
+        "products": products,
+        'vendor': vendor,
     }
 
     return render(request, 'shop/index.html', context)
@@ -103,19 +101,3 @@ def add_review(request, title):
 
     return render(request, 'shop/product.html', context)
 
-
-def add_category(request):
-    if request.method == "POST":
-        form = CategoryForm(request.POST, request.FILES)
-        y = request.POST.get('image')
-        print(y)
-        if form.is_valid():
-            cat_post = Category.objects.create(
-                title=form.cleaned_data['title'],
-                image=form.cleaned_data['image']
-
-            )
-            cat_post.save()
-            return redirect(request.META.get('HTTP_REFERER', 'redirect_if_referer_not_found'))
-        else:
-            return redirect(request.META.get('HTTP_REFERER', 'redirect_if_referer_not_found'))

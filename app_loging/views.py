@@ -22,7 +22,8 @@ from rest_framework.request import Request
 from .forms import RegistrationForm
 from .models import *
 from .serializers import UserSerializer
-
+from shop.models import Contact
+from shop.serializers import ContactSerializer
 
 class RegisterUser(CreateView):
     form_class = RegistrationForm
@@ -43,28 +44,6 @@ class LoginUser(LoginView):
         return reverse_lazy('base')
 
 
-# def loginview(request, *args, **kwargs):
-#     if request.user.is_authenticated:
-#         return redirect('base')
-#     if request.method == 'POST':
-#         email = request.POST.get('email')
-#         password = request.POST.get('password')
-#
-#         try:
-#             user = User.objects.get(email=email)
-#         except:
-#             messages.warning(request, f'Пользователь с почтой {email} не существует')
-#
-#         user = authenticate(request, email=email, password=password)
-#         if user is not None:
-#             login(request, user)
-#             messages.success(request, 'Успех')
-#             return redirect('base')
-#         else:
-#             messages.warning(request, 'Пользователь не существует')
-#     return render(request, 'auth/login.html')
-
-
 def logout_user(request):
     logout(request)
     return redirect('base')
@@ -75,9 +54,9 @@ def lk(request):
 
 
 class RegisterAccount(APIView):
-
+    permission_classes = ()
     def post(self, request, *args, **kwargs):
-        if {'username', 'email', 'password', 'title', 'type'}.issubset(request.data):
+        if {'username', 'email', 'password', 'type'}.issubset(request.data):
             sad = 'asd'
             try:
                 validate_password(request.data['password'])
@@ -116,7 +95,6 @@ class ConfirmAccount(APIView):
 
 
 class AccountDetails(APIView):
-
     authentication_classes = (TokenAuthentication,)
     permission_classes = (IsAuthenticated,)
 
@@ -149,13 +127,15 @@ class AccountDetails(APIView):
 
 
 class LoginAccount(APIView):
-
+    permission_classes = ()
     def post(self, request, *args, **kwargs):
-        if {'email', 'password'}.issubset(request.data):
-            user = authenticate(request, username=request.data['email'], password=request.data['password'])
+        if {'username', 'password'}.issubset(request.data):
+            user = authenticate(request, username=request.data['username'], password=request.data['password'])
             if user is not None:
                 if user.is_active:
                     token, _ = Token.objects.get_or_create(user=user)
                     return JsonResponse({'Status': True, 'Token': token.key})
             return JsonResponse({'Status': False, 'Errors': 'Не удалось авторизовать'})
         return JsonResponse({'Status': False, 'Errors': 'Не указаны все необходимые аргументы'})
+
+
