@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="css/style.css" />
 <h1 align="center"> Сайт-портфолио </h1>
 <h2>Описание</h2>
 • Установлена автоматизации закупок через REST API.<br/>
@@ -19,7 +20,7 @@ Authorization: Token ACCESS_TOKEN
 <h4>Регистрация</h3>
 >api/v1/registration/
  
-Обращаясь к адресу с <span style="color: orange">POST</span> запросом необходимо передать данные: ```{'username': 'user','email':'email, 'password': 'password'}```
+<p>Обращаясь к адресу с <span style="color: orange">POST</span> запросом необходимо передать данные:</p> ```{'username': 'user','email':'email, 'password': 'password'}```
 >опциональное поле {'type': 'тип пользователя shop/buyer'}
  
 
