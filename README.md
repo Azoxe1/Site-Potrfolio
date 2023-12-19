@@ -18,23 +18,23 @@ Authorization: Token ACCESS_TOKEN
 
 <h4>Регистрация</h3>
 >api/v1/registration/
-> 
+ 
 Обращаясь к адресу с <span style="color: orange">POST</span> запросом необходимо передать данные: ```{'username': 'user','email':'email, 'password': 'password'}```
 >опциональное поле {'type': 'тип пользователя shop/buyer'}
-> 
+ 
 
 В качестве ответа будет получено: 
 ```{"Status": true}```<br/><br/><br/>
 <h3>Авторизация</h3>
 >api/v1/login/
-> 
+ 
 Обращаясь к адресу с <span style="color: orange">POST</span> запросом необходимо передать данные: ```{'username': 'user', 'password': 'password'}```
 <br/>
 В качестве ответа будет получено: ```{"Status": true, "Token": "ACCESS_TOKEN"}```<br/><br/><br/>
 
 <h3>Информация о пользователе</h3>
 >api/v1/details/
-> 
+ 
 При обращении с <span style="color: green">GET</span> запросом, с применением ACCESS_TOKEN.
 <br/>
 Ответ: Данные по юзеру, контакты, в формате Json
@@ -45,12 +45,12 @@ Authorization: Token ACCESS_TOKEN
 
 <h3>Подтверждение почты</h3>
 >api/v1/confirm/
-> 
+
 <br/><br/><br/>
 
 <h3>Контактная информация</h3>
 >api/v1/contact/
-> 
+
 При обращении с <span style="color: green">GET</span> запросом, с применением ACCESS_TOKEN.
 <br/>
 Ответ: Получение контактных данных по юзеру```[
@@ -76,7 +76,7 @@ Authorization: Token ACCESS_TOKEN
 
 <h3>Оформление заказа</h3>
 >api/v1/order/
-> 
+
 При обращении с <span style="color: green">GET</span> запросом, с применением ACCESS_TOKEN. Просмотр существующих заказов и товаров в нём.
 <br/>
 Ответ: Данные по заказам юзера```[
