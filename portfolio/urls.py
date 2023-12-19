@@ -29,7 +29,7 @@ from portfolio.views import *
 
 urlpatterns = [
     #reset_password_test
-    path('reset/<uidb64>/<token>', auth_views.PasswordResetConfirmView.as_view(),
+    path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(),
           name ='password_reset_confirm'),
     path('reset_password/', auth_views.PasswordResetView.as_view(),
          name ='reset_password'),
