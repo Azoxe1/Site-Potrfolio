@@ -5,6 +5,8 @@ from django.conf import settings
 from django.urls import reverse_lazy
 from rest_framework.generics import ListAPIView
 from rest_framework.response import Response
+from silk.profiling.profiler import silk_profile
+
 from .serializers import *
 from rest_framework import status
 
@@ -23,9 +25,9 @@ def projects(request):
     return render(request, 'project_page_2.html', context)
 
 
-
 def base(request):
     return render(request, 'base_page.html', )
+
 
 
 def index(request):
@@ -39,6 +41,7 @@ def index(request):
     return render(request, 'shop/index.html', context)
 
 
+
 def product_list_view(request, title):
     category = Category.objects.get(title=title)
     products = Product.objects.filter(product_status="опубликовано", category=category)
@@ -50,6 +53,7 @@ def product_list_view(request, title):
     return render(request, 'shop/index.html', context)
 
 
+
 def category_list(request):
     category = Category.objects.all().order_by('-id')
     cat_form = CategoryForm()
@@ -59,6 +63,7 @@ def category_list(request):
     }
 
     return render(request, 'shop/category.html', context)
+
 
 
 def product_view(request, title):
@@ -75,6 +80,7 @@ def product_view(request, title):
 
     }
     return render(request, 'shop/product_2.html', context)
+
 
 
 def add_review(request, title):
@@ -100,4 +106,3 @@ def add_review(request, title):
     average_rating = ProductReview.objects.filter(product=product).aggregate(rating=Avg("rating"))
 
     return render(request, 'shop/product.html', context)
-

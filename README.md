@@ -20,7 +20,7 @@ Authorization: Token ACCESS_TOKEN
 <h4>Регистрация</h3>
 >api/v1/registration/
  
-<p>Обращаясь к адресу с <span style="color: orange">POST</span> запросом необходимо передать данные:</p> ```{'username': 'user','email':'email, 'password': 'password'}```
+Обращаясь к адресу с <span style="color: orange">POST</span> запросом необходимо передать данные: ```{'username': 'user','email':'email, 'password': 'password'}```
 >опциональное поле {'type': 'тип пользователя shop/buyer'}
  
 

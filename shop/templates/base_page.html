@@ -20,19 +20,11 @@
 <!--               <video src="fon_video.mp4" autoplay muted loop width="1500" height="600" controls></video>-->
            <div class="effects"></div>
            <div class="video-bg__content">
-              <h1> Сайт-портфолио </h1><br/>
-
+              <h2> Добро пожаловать, на сайт-портфолио </h2>
+               <h3> Для навигации используйте меню </h3><br/>
+                <a href="{% url "social:begin" "google-oauth2" %}">Google+</a>
                <p>
-• Установлена автоматизации закупок через REST API.<br/>
-• Создана визуальная составляющая<br/>
-• Форма обратной связи с отбивкой на почту админам<br/>
-• Подтверждение регистрации на почту указанную при регистрации<br/>
-• Онлайн корзина, через КЭШ, для каждого юзера<br/>
-• Динамичная вкладка с проектами<br/>
-• Настроенная админка, для удобного управления сайтом<br/>
-• Возможность управлением продукцией, для магазинов<br/>
-• Уведомление на почту (покупателю) при изменении состава заказа<br/><br/><br/><br/>
-                   <h5>Для ориентированию по сайту, используйте вкладку "Навигация"</h5>
+
                </p>
             </div>
         </div>
@@ -44,9 +36,15 @@
 
 
 <style>
-    p {
+    h2 {
+    font-size: 32px;
+    font-family: Arial, sans-serif;
+    opacity: 0.6;
+    }
+    h3 {
     font-size: 22px;
-    font-family: 'Arial';
+    font-family: Arial, sans-serif;
+    opacity: 0.4;
     }
 h1 {
 font-size:35pt;
@@ -93,6 +91,7 @@ body {
     z-index: 2;
     color: #ffffff;
     font-size: 50px;
+    text-align: center;
 }
 .main {
     max-width: 1600px;

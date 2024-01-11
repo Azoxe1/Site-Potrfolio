@@ -6,8 +6,9 @@ from app_loging.serializers import ContactSerializer
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
-        fields = ('id', 'name',)
+        fields = ('id', 'title',)
         read_only_fields = ('id',)
+
 
 
 class ProductSerializer(serializers.ModelSerializer):
@@ -17,6 +18,13 @@ class ProductSerializer(serializers.ModelSerializer):
         model = Product
         fields = ('id', 'title', 'description', 'price', 'product_status',
                   'feachured', 'old_price', 'vendor', 'category')
+
+
+class ContactSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Contact
+        fields = ('street', 'user', 'city', 'house', 'structure',
+                  'building', 'apartment', 'phone')
 
 
 class OrderItemSerializer(serializers.ModelSerializer):
@@ -35,7 +43,6 @@ class OrderItemCreateSerializer(OrderItemSerializer):
 
 class OrderSerializer(serializers.ModelSerializer):
     ordered_items = OrderItemCreateSerializer(read_only=True, many=True)
-
 
     contact = ContactSerializer(read_only=True)
 

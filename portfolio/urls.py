@@ -26,6 +26,7 @@ from feedback.views import contact
 from app_loging.views import *
 
 from portfolio.views import *
+from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
 
 urlpatterns = [
     #reset_password_test
@@ -40,6 +41,8 @@ urlpatterns = [
     #base
     path('', base, name='base'),
     path('admin/', admin.site.urls),
+    #админка
+    path('baton/', include('baton.urls')),
     #auth
     path('registration/', RegisterUser.as_view(), name='registration'),
     path('login/', LoginUser.as_view(), name='login'),
@@ -48,6 +51,7 @@ urlpatterns = [
     path('projects/', projects, name='projects'),
     path('contact_form/', contact, name='contact_form'),
     path('lk/', lk, name='lk'),
+    path('', include('social_django.urls', namespace='social')),
     #shop
     path('shop/', index, name='shop'),
     path('category/', category_list, name='category'),
@@ -70,5 +74,12 @@ urlpatterns = [
     path('api/v1/login/', LoginAccount.as_view(), name='api_login'),
     path('api/v1/order/', OrderView.as_view(), name='api_order'),
     path('api/v1/cart/', CartView.as_view(), name='api_cart'),
+    #оптимизиция_не работает
+    # path('silk/', include('silk.urls', namespace='silk'))
+    #DRF
+    path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
+    # Optional UI:
+    path('api/schema/swagger-ui/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
+    path('api/schema/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
