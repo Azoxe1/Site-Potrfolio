@@ -15,7 +15,9 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 
-from django.contrib import admin
+# from django.contrib import admin
+
+from baton.autodiscover import admin
 from django.urls import path, include, re_path
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
@@ -40,8 +42,8 @@ urlpatterns = [
          name ='password_reset_complete'),
     #base
     path('', base, name='base'),
-    path('admin/', admin.site.urls),
     #админка
+    path('admin/', admin.site.urls),
     path('baton/', include('baton.urls')),
     #auth
     path('registration/', RegisterUser.as_view(), name='registration'),

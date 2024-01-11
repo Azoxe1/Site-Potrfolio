@@ -49,25 +49,26 @@ SOCIAL_AUTH_PIPELINE = (
 CSRF_TRUSTED_ORIGINS = []
 
 INSTALLED_APPS = [
+    'baton',
 
-    'app_loging',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
+    'baton.autodiscover',
     'rest_framework',
     'rest_framework.authtoken',
     'djoser',
     'pytest',
     'silk',
     'drf_spectacular',
-    # 'baton', улучшение админки, не работает пока
-    # 'baton.autodiscover',
+                                               #улучшение админки
+
     'social_django',
 
+    'app_loging',
     'shop.apps.MainConfig',
     'feedback',
     'cart',
@@ -119,6 +120,9 @@ TEMPLATES = [
                 'social_django.context_processors.backends',
                 'social_django.context_processors.login_redirect',
             ],
+            # 'libraries': {
+            #     'baton_tags' : 'portfolio.templatetags.baton_tags',
+            # },
         },
     },
 ]
@@ -152,14 +156,14 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-AUTHENTICATION_BACKENDS = (
-    'social_core.backends.open_id.OpenIdAuth',
-    'social_core.backends.google.GoogleOAuth2',
-    'social_core.backends.google.GoogleOAuth',
-    'social_core.backends.twitter.TwitterOAuth',
-    'social_core.backends.yahoo.YahooOpenId',
-    'django.contrib.auth.backends.ModelBackend',
-)
+# AUTHENTICATION_BACKENDS = (
+#     'social_core.backends.open_id.OpenIdAuth',
+#     'social_core.backends.google.GoogleOAuth2',
+#     'social_core.backends.google.GoogleOAuth',
+#     'social_core.backends.twitter.TwitterOAuth',
+#     'social_core.backends.yahoo.YahooOpenId',
+#     'django.contrib.auth.backends.ModelBackend',
+# )
 
 
 LANGUAGE_CODE = 'ru-RU'
@@ -256,8 +260,8 @@ BATON = {
             { 'type': 'free', 'label': 'Another custom link', 'url': 'http://www.google.it' },
         ] },
     ),
-    'ANALYTICS': {
-        'CREDENTIALS': os.path.join(BASE_DIR, 'credentials.json'),
-        'VIEW_ID': '12345678',
-    }
+    # 'ANALYTICS': {
+    #     'CREDENTIALS': os.path.join(BASE_DIR, 'credentials.json'),
+    #     'VIEW_ID': '12345678',
+    # }
 }
