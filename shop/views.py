@@ -5,7 +5,6 @@ from django.conf import settings
 from django.urls import reverse_lazy
 from rest_framework.generics import ListAPIView
 from rest_framework.response import Response
-from silk.profiling.profiler import silk_profile
 
 from .serializers import *
 from rest_framework import status

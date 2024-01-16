@@ -4,3 +4,5 @@ djangoenv/
 .env
 *.log
 requests_ex.http
+new_key
+new_key.pub

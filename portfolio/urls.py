@@ -44,7 +44,6 @@ urlpatterns = [
     path('', base, name='base'),
     #админка
     path('admin/', admin.site.urls),
-    # path('baton/', include('baton.urls')),
     #auth
     path('registration/', RegisterUser.as_view(), name='registration'),
     path('login/', LoginUser.as_view(), name='login'),
