@@ -34,6 +34,7 @@ SOCIAL_AUTH_JSONFIELD_ENABLED = True        #соц сети
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
 SOCIAL_AUTH_REQUIRE_POST = True
 
+
 SOCIAL_AUTH_PIPELINE = (
     'social_core.pipeline.social_auth.social_details',
     'social_core.pipeline.social_auth.social_uid',
