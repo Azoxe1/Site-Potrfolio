@@ -62,8 +62,6 @@ INSTALLED_APPS = [
     'pytest',
     'drf_spectacular',
 
-    'silk',
-
     'social_django',
 
     'app_loging',
