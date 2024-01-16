@@ -15,7 +15,6 @@ from django.contrib.auth import authenticate
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
 from django.core.validators import URLValidator
-from silk.profiling.profiler import silk_profile
 from yaml import load as load_yaml, Loader
 from rest_framework import serializers as s
 from .models import *
@@ -29,7 +28,7 @@ from rest_framework.generics import ListAPIView
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from yaml import load as load_yaml
-from ujson import loads as load_json
+
 from .signals import new_order
 
 
